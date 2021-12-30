@@ -1,10 +1,10 @@
 FROM golang:latest
 LABEL version="1.0" \
       "site.name"="FORUM" \
-      maintainers="Rik0 and ALika96" \
+      maintainers="AkhatN and Alika96" \
       release-date="November 18, 2021" \
       description="FORUM" \
-      authors="Rik0 and Alika96"
+      authors="AkhatN and Alika96"
 WORKDIR /forum
 
 RUN mkdir model
