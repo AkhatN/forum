@@ -1,0 +1,35 @@
+{{define "bootstrap"}}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Forum</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/like.css">
+        <link rel="icon" href="data:;base64,=">
+
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/text.css" rel="stylesheet"> 
+
+    </head>
+    <body>
+        <script src="/static/js/jquery-3.6.0.js"></script>
+
+        {{template "navbar" .}}
+
+        <div class="container">
+
+            {{template "main" .}}
+           
+        </div>
+
+        <!-- jquery & Bootstrap JS -->
+        
+        <script src="/static/js/bootstrap.js"></script>
+    </body>
+</html>
+{{end}}

@@ -1,0 +1,185 @@
+{{ define "main" }}
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span class="lead"> <i class="fa fa-comment-o"></i> {{ .Post.Title }}</span>
+    <div class="pull-right">
+      Posted by {{ .Post.AuthName }} - {{ .Post.Date }}
+    </div>
+</div>
+<div class="panel-body">
+
+    <div class="form-group">
+        Categories:
+        {{range .Post.Cats}}
+        <a href="/cats/{{.Name}}"><span class="label label-default">{{.Name}}</span></a>
+        {{end}}
+    </div>
+
+    <div class="form-group">
+        <pre>{{.Post.FullText}}</pre>
+    </div>
+    
+    {{ if .Post.IsImage }}
+    <div class="form-group">
+        <img src="{{ .Post.Image }}" class="img-responsive" alt="image"> 
+    </div>
+    {{ end }}
+    
+    <div class="form-group">
+    <form action="/like" method="POST">
+        {{if .Post.Sel.IsLike}}
+        <button class="clicked" name="selector" value="clike">
+            <i class="fa fa-thumbs-up"></i>
+            Like
+        </button>
+        {{else}}
+        <button name="selector" value="like">
+            <i class="fa fa-thumbs-up"></i>
+            like
+        </button>
+        {{end}}
+        {{.Post.AmountOfLikes}}
+        {{if .Post.Sel.IsDislike}}
+        <button class="clicked" name="selector" value="cdislike">
+            <i class="fa fa-thumbs-down"></i>
+            dislike
+        </button>
+        {{else}}
+        <button name="selector" value="dislike">
+            <i class="fa fa-thumbs-down"></i>
+            dislike
+        </button>
+        {{end}}
+        {{.Post.AmountOfDislikes}}
+        <input type="hidden" name="IdPOST" value="{{.Post.ID}}">
+    </form>
+</div>
+{{ if .User.IsStatus}}
+{{if eq .Post.AuthID .User.ID}}
+<div class="form-group">
+  <form action="/editPost/" method="GET">
+    <button  class="btn btn-default pull-left">
+      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      Edit
+    </button>
+    <input type="hidden" name="PostId" value={{.Post.ID}}>
+  </form>
+  <form action="/deletePost" method="POST">
+    <button  class="btn btn-danger pull-right">
+      Delete
+    </button>
+    <input type="hidden" name="PostId" value={{.Post.ID}}>
+  </form>
+</div>
+{{ else if or (eq $.User.Role 2) (eq $.User.Role 1)}}
+<div class="form-group">
+  <form action="/deletePost" method="POST">
+    <button  class="btn btn-danger pull-right">
+      Delete
+    </button>
+    <input type="hidden" name="PostId" value={{.Post.ID}}>
+  </form>
+</div>
+{{ end }}
+{{ end }}
+</div>
+
+
+  
+  {{range .Post.Comments}}
+  
+  <div class="panel-heading">
+      <span class="panel-title"><i class="fa fa-comment"></i> Commented by {{ .AuthName }}</span>
+      <span class="pull-right"> {{ .Date }}
+    </div>
+
+  <div class="panel-body">
+    <div class="form-group">
+        <pre>{{ .Comm }}</pre>
+    </div>
+
+    <div class="form-group">
+    <form action="/comlike" method="POST">
+        {{if .Sel.IsLike}}
+        <button class="clicked" name="selector" value="clike">
+            <i class="fa fa-thumbs-up"></i>
+            like
+        </button>
+        {{else}}
+        <button name="selector" value="like">
+            <i class="fa fa-thumbs-up"></i>
+            like
+        </button>
+        {{end}}
+        {{.AmountOfLikes}}
+        {{if .Sel.IsDislike}}
+        <button class="clicked" name="selector" value="cdislike">
+            <i class="fa fa-thumbs-down"></i>
+            dislike
+        </button>
+        {{else}}
+        <button name="selector" value="dislike">
+            <i class="fa fa-thumbs-down"></i>
+            dislike
+        </button>
+        {{end}}
+        {{.AmountOfDislikes}}
+        <input type="hidden" name="IdCom" value="{{.ID}}">
+        <input type="hidden" name="PostId" value={{.PostID}}>
+    </form>
+</div>
+{{if eq .AuthID $.User.ID}}
+<br>
+<div class="form-group">
+    <form action="/editComm/" method="GET">
+      <button  class="btn btn-default pull-left">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        Edit
+      </button>
+        <input type="hidden" name="IdCom" value="{{.ID}}">
+        <input type="hidden" name="PostId" value={{.PostID}}>
+    </form>
+    <form action="/deleteComm" method="POST">
+        <button  class="btn btn-danger pull-right">
+            Delete
+        </button>
+        <input type="hidden" name="IdCom" value="{{.ID}}">
+        <input type="hidden" name="PostId" value={{.PostID}}>
+    </form>
+</div>
+{{ else if eq $.User.Role 1}}
+<div class="form-group">
+  <form action="/deleteComm" method="POST">
+    <button  class="btn btn-danger pull-right">
+      Delete
+    </button>
+    <input type="hidden" name="IdCom" value="{{.ID}}">
+    <input type="hidden" name="PostId" value={{.PostID}}>
+  </form>
+</div>
+{{ end }}
+
+</div>
+  {{ end }}    
+
+</div>
+
+
+{{ if .User.IsStatus}}
+    <div class="panel panel-info">
+        <div class="panel-body">
+         <form role="form" action="/savecomment" method="POST">
+           <div class="form-group">
+             <textarea class="form-control" style="max-width: 100%; min-width: 100%; max-height: 300px;" name="comment" id="body" placeholder="Write your comment here" rows="3" required></textarea>
+             <input type="hidden" name="IdPost" value="{{.Post.ID}}">
+             <br/>
+             <button class="btn btn-primary pull-right active" type="submit">Comment</button>
+           </div>
+         </form>
+         </div>
+      </div>
+  {{ else }}
+    {{end}}
+
+{{ end }}

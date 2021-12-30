@@ -1,0 +1,80 @@
+{{ define "main" }}
+<div class="panel panel-default">
+  <div class="panel-body">  
+
+
+
+
+{{ if eq .User.Role 1}}
+
+    <form action="/makerequest" method="POST">
+     <div class="form-group">
+         <input id= "#" class="form-control" type="text" placeholder="Username.." name="makereq" list="list" required>
+         <input type="hidden" list="list">
+            <datalist id="list">
+                {{range .Users}}
+                <option>{{ .Username }}</option>
+                {{end}}
+              </datalist>
+              <br>
+        <button name="role" value="user" class="btn btn-danger btn-primary pull-left active" type="submit">Demote</button>
+        <button name="role" value="moderator" class="btn btn-succes btn-primary pull-right active" type="submit">Promote</button><br>
+    </div>
+    </form>
+
+
+{{ end }}
+
+
+
+
+
+{{ if eq .User.Role 2}}
+
+
+
+
+    <form role="form" action="/makerequest" method="POST">
+        <div class="form-group">
+            <span class="lead">I don't want to be a moderator</span>
+            <button name="makereq" value="cancel" class="btn btn-lg btn-primary pull-right active" type="submit" >Submit</button>
+       </div>
+    </form>
+    
+
+
+
+{{ end }}
+
+{{ if eq .User.Role 3}}
+
+
+<div class="form-group">
+    <form role="form" action="/makerequest" method="POST">
+        {{if eq .User.IsRequest false}}
+        {{if and (eq .User.IsCancelRequest true) (eq .User.IsCancel false)}}
+        <div class="panel-heading">
+            <span class="bg-danger">Admin declined your request, you can try later</span> 
+        </div> 
+        {{end}}
+        <div class="form-group">
+            <span class="lead">Send query to Admin "I want to be a moderator</span>
+            <button class="btn btn-lg btn-primary pull-right active" name="makereq" value ="submit" type="submit" >Send</button>
+       </div>
+    </div>
+{{else if eq .User.IsRequest true}}
+       <div class="form-group">
+        <span class="lead">Your request is pending</span>
+        <button class="btn btn-lg btn-primary pull-right active" name="makereq" value ="cancel" type="submit" >Cancel</button>
+       </div>
+       {{end}}
+    </form>
+
+
+
+{{ end }}
+
+ 
+</div>
+</div>
+{{ end }}

@@ -1,0 +1,90 @@
+{{define "main"}}
+<main>
+        <p class="lead">
+            <a href="/createpost">Create a post</a> or join one below!
+          </p>
+
+        {{range .Posts}}
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="box-sizing: border-box;">
+              <span class="lead"><a href="/title/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+              <div class="pull-right">
+                Posted by {{ .AuthName}} - {{ .Date }}
+              </div>
+            </div>
+           
+            <div class="panel-body">
+              <div class="pull-right">
+                <a href="/title/{{.ID}}">Read more</a>
+              </div>
+              Categories:
+                {{range .Cats}}
+                <a href="/cats/{{.Name}}"><span class="label label-default">{{.Name}}</span></a>
+                {{end}}
+                <br>
+                <br>
+
+                <form action="/like" method="POST">
+                    {{if .Sel.IsLike}}
+                    <button class="clicked" name="selector" value="clike">
+                        <i class="fa fa-thumbs-up" class="clicked"></i>
+                        like
+                    </button>
+                    {{else}}
+                        <button name="selector" value="like">
+                            <i class="fa fa-thumbs-up"></i>
+                            like 
+                        </button>
+                        {{end}}
+                        {{.AmountOfLikes}}
+                        {{if .Sel.IsDislike}}
+                        <button class="clicked" name="selector" value="cdislike">
+                            <i class="fa fa-thumbs-down" class="clicked"></i>
+                            dislike
+                        </button>
+                        {{else}}
+                        <button name="selector" value="dislike">
+                            <i class="fa fa-thumbs-down"></i>
+                            dislike
+                        </button>
+                        {{end}}
+                        {{.AmountOfDislikes}}
+                        <input type="hidden" name="IdPOST" value="{{.ID}}">
+                    </form>
+                    <br>
+                    
+                      {{ if $.User.IsStatus}}
+                      {{if eq .AuthID $.User.ID}}
+                      <div class="form-group">
+                        <form action="/editPost/" method="GET">
+                          <button  class="btn btn-default pull-left">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            Edit
+                          </button>
+                          <input type="hidden" name="PostId" value={{.ID}}>
+                        </form>
+                        <form action="/deletePost" method="POST">
+                          <button  class="btn btn-danger pull-right">
+                            Delete
+                          </button>
+                          <input type="hidden" name="PostId" value={{.ID}}>
+                        </form>
+                      </div>
+                      {{ else if or (eq $.User.Role 2) (eq $.User.Role 1)}}
+                      <div class="form-group">
+                        <form action="/deletePost" method="POST">
+                          <button  class="btn btn-danger pull-right">
+                            Delete
+                          </button>
+                          <input type="hidden" name="PostId" value={{.ID}}>
+                        </form>
+                      </div>
+                      {{ end }}
+                      {{ end }}
+                    
+                </div>
+              </div>
+            {{end}}
+        </main>
+    {{end}}

@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class="panel panel-default">
+  <div class="panel-body">  
+
+
+
+
+
+<form role="form" action="/savecats" method="POST">
+  <div class="input-group control-group after-add-more">  
+    <input type="text" name="savecat" class="form-control" placeholder="e.g. (golang)" required>  
+    <div class="input-group-btn">   
+      <button class="btn btn-success add-more" type="submit"><i class="glyphicon glyphicon-plus"></i> Create the category</button>  
+    </div>  
+  </div> 
+</form>
+
+
+{{ range .Post.Cats }}
+<form role="form" action="/deletecats" method="POST">
+    <div class="control-group input-group" style="margin-top:10px">  
+      <input type="hidden" name="deletecat" value="{{.ID}}">
+      <h3>
+        <span class="lead label label-default">{{ .Name}}</span>  
+        <button class="btn btn-danger remove" type="submit"><i class="glyphicon glyphicon-remove"></i> Delete</button>  
+      </h3>
+      
+      </div>  
+    </form>
+   
+{{ end }}
+
+</div>  
+
+</div>
+
+{{ end }}

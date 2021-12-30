@@ -1,0 +1,58 @@
+  {{ define "main" }}
+  <div class="panel panel-default">
+    <div class="panel-body">  
+<form role="form" action="/savepost" method="POST" enctype="multipart/form-data">
+  {{if .IsErr}}
+    <div class="panel-heading">
+      <div class="lead bg-danger">{{.ErrMsg}}</div>
+    </div>
+  {{else}}
+  <div class="panel-heading">
+  <div class="lead">Start a new post with the following title</div>
+  </div>
+  {{end}}
+  <div class="form-group">
+    <label for="title"><b>Title</b></label>
+    <input class="form-control" type="text" name="title" placeholder="Be specific" required>
+    </div> 
+    <br/>
+    <div class="form-group">
+      <label for="text">Body</label>
+      <textarea type="fulltext" class="form-control" style="max-width: 100%; min-width: 100%; max-height: 300px;" id="bodytext" rows="5" cols="40" name="text" placeholder="Include all the information you want to post" required></textarea>
+  </div>
+    <br/>
+    <div class="form-group">
+      <label for="uploaded">Image</label>
+      <div>You can upload image in JPEG/PNG/GIF format.</div>
+      <input type="file" name="uploaded">
+      <div>(Max 20 MB)</div>
+  </div>
+    <br/>
+    <label for="categories">Categories</label>
+        <div>Add up to 5 categories to describe what your post is about</div>
+          <div class="input-group control-group after-add-more">  
+            <input type="text" name="addmore[]" class="form-control cat" placeholder="e.g. (golang)" required>  
+            <div class="input-group-btn">   
+              <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>  
+            </div>  
+          </div> 
+    <br/>
+    <br/>
+    <button class="btn btn-lg btn-primary pull-right active" type="submit">Create this post</button>
+  </form>
+  </div>
+
+
+
+<div class="copy hide">  
+  <div class="control-group input-group" style="margin-top:10px">  
+    <input type="text" name="addmore[]" class="form-control" placeholder="e.g. (golang)" required>  
+    <div class="input-group-btn">   
+      <button class="btn btn-danger remove " type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
+    </div>  
+  </div>  
+</div>  
+<script type="text/javascript" src="/static/js/tags.js"></script>  
+</div>
+</div>
+{{ end }}

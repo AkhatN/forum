@@ -1,0 +1,86 @@
+{{ define "main" }}
+<div class="panel panel-default">
+  <div class="panel-body">  
+<form role="form" action="/editedPost/" method="POST" enctype="multipart/form-data">
+{{if .IsErr}}
+<div class="panel-heading">
+  <div class="lead bg-danger">{{.ErrMsg}}</div>
+</div>
+{{else}}
+<div class="panel-heading">
+<div class="lead">Edit the post</div>
+</div>
+{{end}}
+<div class="form-group">
+  <label for="title"><b>Title</b></label>
+  <input class="form-control" type="text" name="title" value="{{.Post.Title}}" required>
+  </div>  
+  <br/>
+  <div class="form-group">
+    <label for="text">Body</label>
+    <textarea type="fulltext" class="form-control" style="max-width: 100%; min-width: 100%; max-height: 300px;" id="bodytext" rows="5" cols="40" name="text" required>{{.Post.FullText}}</textarea>
+</div>
+  <br/>
+  <div class="form-group">
+    <label for="uploaded">Image</label>
+    <div>You can upload another image in JPEG/PNG/GIF format.</div>
+    <input type="file" name="uploaded">
+    <div>(Max 20 MB)</div>
+    <br>
+    {{ if .Post.IsImage}}
+    <label for="deleteimage">If you want to delete previous image, press checkbox</label>
+    <input type="checkbox" name="deleteimage" id="deleteimage">
+    {{ end }}
+</div>
+  <br/>
+  <label for="categories">Categories</label>
+      <div>Add up to 5 categories to describe what your post is about</div>
+      {{ if eq .Post.Ncats 0}}
+      <div class="input-group control-group after-add-more">  
+        <input type="text" name="addmore[]" class="form-control cat" placeholder="e.g. (golang)" required>  
+        <div class="input-group-btn">   
+          <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>  
+        </div>  
+      </div> 
+      {{ else }}
+      {{ range $index, $el := .Post.Cats}}
+      {{ if eq $index 0 }}
+        <div class="input-group control-group after-add-more">  
+          <input type="text" name="addmore[]" class="form-control cat" value="{{$el.Name}}" required>  
+          <div class="input-group-btn">   
+            <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>  
+          </div>  
+        </div> 
+        {{ else }}
+        <div class="control-group input-group" style="margin-top:10px">  
+            <input type="text" name="addmore[]" class="form-control cat" value="{{$el.Name}}" required>  
+            <div class="input-group-btn">   
+              <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
+            </div>  
+          </div>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+  <br/>
+  <br/>
+  <input type="hidden" name="PostId" value={{.Post.ID}}>
+  <button class="btn btn-lg btn-primary pull-right active" type="submit">Edit the post</button>
+</form>
+<a href="/"><button class="btn btn-lg btn-primary pull-left active">Cancel</button></a>
+</div>
+
+
+
+
+<div class="copy hide">  
+<div class="control-group input-group" style="margin-top:10px">  
+  <input type="text" name="addmore[]" class="form-control" placeholder="e.g. (golang)" required>  
+  <div class="input-group-btn">   
+    <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
+  </div>  
+</div>  
+</div>  
+<script type="text/javascript" src="/static/js/tags.js"></script>  
+</div>
+</div>
+{{ end }}

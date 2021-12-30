@@ -1,0 +1,21 @@
+{{define "main"}}
+        <div class="panel panel-info">
+            <div class="panel-body">
+                    {{ if .IsErr}}
+                    <div class="form-group bg-danger">
+                            {{.ErrMsg}}
+                    </div>
+                    {{end}}
+               <div class="form-group">
+                <form role="form" action="/editedComm/" method="POST">
+                 <textarea class="form-control" style="max-width: 100%; min-width: 100%; max-height: 300px;" name="comment" id="body" rows="3" required>{{.Post.Com.Comm}}</textarea>
+                 <br/>
+                 <button class="btn btn-primary pull-right active" type="submit">Edit the comment</button>
+                 <input type="hidden" name="PostId" value={{.Post.ID}}>
+                <input type="hidden" name="IdCom" value={{.Post.Com.ID}}>
+                </form>
+                <a href="/title/{{.Post.ID}}"><button class="btn btn-primary pull-left active">Cancel</button></a>
+               </div>
+             </div>
+        </div>
+{{end}}

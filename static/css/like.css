@@ -1,0 +1,9 @@
+
+.clicked {
+	background-color: #999;
+	
+}
+
+.clicked:hover {
+	background-color: #333;
+}

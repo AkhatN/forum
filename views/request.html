@@ -1,0 +1,161 @@
+{{ define "main" }}
+<div class="panel panel-default">
+  <div class="panel-body">  
+
+
+{{ if eq .User.Role 1}}
+
+{{ range .Posts}}
+
+{{ if and (eq .Valid true) (eq .ValidAdmin false)}}
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="box-sizing: border-box;">
+        <span class="lead">{{.AcceptedName}} accepted this post <a href="/title/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+        <div class="pull-right">
+            {{ .Date }}
+          </div>
+   </div>
+</div>
+
+{{ else if and (eq .Valid false) (eq .ValidAdmin false) (eq .IsValid true)}}
+
+<div class="panel panel-default">
+  <div class="panel-heading" style="box-sizing: border-box;">
+      <span class="lead">This post needs to be handled <a href="/handlerequest/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+      <div class="pull-right">
+          {{ .Date }}
+        </div>
+ </div>
+</div>
+
+{{ else if and (eq .Valid false) (eq .ValidAdmin true)}}
+
+<div class="panel panel-default">
+  <div class="panel-heading" style="box-sizing: border-box;">
+      <span class="lead">{{.AcceptedName}} reported about this post - <a href="/handlerequest/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+      <div class="pull-right">
+          {{ .Date }}
+        </div>
+ </div>
+</div>
+
+
+{{ end}}
+{{ end}}
+
+{{range .Users}}
+
+<div class="panel panel-default">
+  <div class="panel-heading" style="box-sizing: border-box;">
+      <span class="lead">{{.Username}} requested to be moderator <a href="/makerequest" style="overflow-x:scroll"><i class="fa fa-comment-o"> go to Make Request Page</i></a></span>
+ </div>
+</div>
+
+{{end}}
+{{ end }}
+
+
+
+
+
+{{ if eq .User.Role 2}}
+
+{{ range .Posts}}
+
+{{ if and (eq .Valid true) (eq .ValidAdmin false)}}
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="box-sizing: border-box;">
+        <span class="lead">{{.AcceptedName}} accepted this post <a href="/title/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+        <div class="pull-right">
+            {{ .Date }}
+          </div>
+   </div>
+</div>
+
+{{ else if and (eq .Valid false) (eq .ValidAdmin false) (eq .IsValid true)}}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="box-sizing: border-box;">
+        <span class="lead">This post needs to be handled <a href="/handlerequest/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+        <div class="pull-right">
+            {{ .Date }}
+          </div>
+   </div>
+</div>
+
+{{ else if and (eq .Valid false) (eq .ValidAdmin true)}}
+
+<div class="panel panel-default">
+  <div class="panel-heading" style="box-sizing: border-box;">
+      <span class="lead">Admin not accepted the post "{{.Title}}" yet <i class="fa fa-comment-o"></i></span>
+      <div class="pull-right">
+          {{ .Date }}
+        </div>
+ </div>
+</div>
+
+
+{{ end}}
+{{ end}}
+{{ end }}
+
+{{ if eq .User.Role 3}}
+
+{{ range .Posts}}
+
+{{if eq .Valid true}}
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="box-sizing: border-box;">
+        <span class="lead">{{if eq .AcceptedAuthRole 2}} Moderator: {{else}} admin: {{end}} {{.AcceptedName}} accepted your post <a href="/title/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+        <div class="pull-right">
+            {{ .Date }}
+          </div>
+   </div>
+</div>
+
+{{ else if and (eq .Valid false) (eq .ValidAdmin false) (eq .IsValid true)}}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="box-sizing: border-box;">
+        <span class="lead">This {{ .Title }} post is pending ... </span>
+        <div class="pull-right">
+            {{ .Date }}
+          </div>
+   </div>
+</div>
+
+{{ else if and (eq .Valid false) (eq .ValidAdmin true)}}
+
+<div class="panel panel-default">
+  <div class="panel-heading" style="box-sizing: border-box;">
+      <span class="lead">Admin not accepted the post "{{.Title}}" yet <i class="fa fa-comment-o"></i></span>
+      <div class="pull-right">
+          {{ .Date }}
+        </div>
+ </div>
+</div>
+
+{{ else if eq .IsValid false}}
+
+<div class="panel panel-default">
+  <div class="panel-heading" style="box-sizing: border-box;">
+      <span class="lead">{{.AcceptedName}} not accepted the post "{{.Title}}" <i class="fa fa-comment-o"></i></span>
+      <div class="pull-right">
+          {{ .Date }}
+        </div>
+ </div>
+</div>
+
+{{ end}}
+{{ end}}
+{{ end }}
+
+ 
+</div>
+</div>
+{{ end }}

@@ -1,0 +1,33 @@
+{{define "main"}}
+    {{range .Posts}}
+    {{if eq .Sel.IsLike true}}
+    <div class="panel panel-default">
+        <div class="panel-heading" style="box-sizing: border-box;">
+            <span class="lead">{{.NotificUsername}} liked your post <a href="/title/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+            <div class="pull-right">
+                {{ .NotificDate }}
+              </div>
+       </div>
+</div>
+{{else if eq .Sel.IsDislike true}}
+<div class="panel panel-default">
+    <div class="panel-heading" style="box-sizing: border-box;">
+        <span class="lead">{{.NotificUsername}} disliked your post <a href="/title/{{.ID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .Title }}</a></span>
+        <div class="pull-right">
+            {{ .NotificDate }}
+          </div>
+    </div>
+</div>
+{{end}}
+    {{end}}
+    {{range .Comments}}
+    <div class="panel panel-default">
+        <div class="panel-heading" style="box-sizing: border-box;">
+            <span class="lead">{{.NotificUsername}} commented your post <a href="/title/{{.PostID}}" style="overflow-x:scroll"><i class="fa fa-comment-o"></i> {{ .PostName }}</a></span>
+            <div class="pull-right">
+                {{.NotificDate}}
+              </div>
+        </div>
+    </div>
+    {{end}}
+    {{end}}

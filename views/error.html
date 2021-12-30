@@ -1,0 +1,15 @@
+{{ define "main" }}
+
+{{ if eq .ErrStatus 404 }}
+<div>404 Page Not Found</div>
+{{ else if eq .ErrStatus 405 }}
+<div>Method Not Allowed 405</div>
+{{ else if eq .ErrStatus 400 }}
+<div>400 Bad request </div>
+{{ else if eq .ErrStatus 500 }}
+<div>500 Internal Server Error</div>
+{{ else if eq .ErrStatus 200}}
+<div>Not Found</div>
+{{end}}
+
+{{ end }}
