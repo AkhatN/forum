@@ -13,9 +13,8 @@ Run the following commands:
     Password: admin
 
 ## Description
-**MVC** pattern was used to structure the forum
 
-This web forum allows :
+The web forum with **Monolithic architecture** and **MVC** pattern was used to structure the forum allows:
 
 * communication between users
 * associating categories to posts
@@ -122,6 +121,3 @@ There are four types of users :
     * Receive reports from moderators. If the admin receives a report from a moderator, he can respond to that report
     * Delete posts and comment
     * Manage the categories, by being able to create and delete them
-
-
-
