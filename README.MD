@@ -3,9 +3,9 @@
 ## To run the project locally
 
 Run the following commands:
-1. For building an exec file: **make build**
-2. For running the project: **make run** or **go run main.go**
-3. For creating an image and running container: **make docker**
+    1. For building an exec file: **make build**
+    2. For running the project: **make run** or **go run main.go**
+    3. For creating an image and running container: **make docker**
 
 ## Admin Role account
 
