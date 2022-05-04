@@ -14,7 +14,7 @@ Run the following commands:
 
 ## Description
 
-The web forum with **Monolithic architecture** and **MVC** pattern was used to structure the forum allows:
+The web forum with **Monolithic architecture** and **MVC** pattern allows:
 
 * communication between users
 * associating categories to posts
