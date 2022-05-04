@@ -1,6 +1,6 @@
 # forum
 
-## Local launch
+## To run the project locally
 
 Run the following commands:
 1. For building an exec file: **make build**
@@ -13,6 +13,7 @@ Login: admin
 Password: admin
 
 ## Description
+**MVC** pattern was used in the forum
 
 This web forum allows :
 
@@ -98,34 +99,29 @@ The max size of the images to load can be 20 mb. If there is an attempt to load 
 * Users are able to to Edit/Remove posts and comments
 
 ### Moderation
-The forum moderation will be based on a moderation system. It must present a moderator that, depending on the access level of a user or the forum set-up, approves posted messages before they become publicly visible.
+There are four types of users :
 
-* The filtering can be done depending on the categories of the post being sorted by irrelevant, obscene, illegal or insulting.
-
-For this optional you should take into account all types of users that can exist in a forum and their levels.
-
-You should implement at least 4 types of users :
 #### Guests
 
 * These are unregistered-users that can neither post, comment, like or dislike a post. They only have the permission to see those posts, comments, likes or dislikes.
 
 #### Users
 
-* These are the users that will be able to create, comment, like or dislike posts.
+* These are the users that are able to create, comment, like or dislike posts.
 
 #### Moderators
 
-* Moderators, as explained above, are users that have a granted access to special functions :
-    * They should be able to monitor the content in the forum by deleting or reporting post to the admin
+* Moderators are users that have a granted access to special functions :
+    * They are able to monitor the content in the forum by deleting or reporting post to the admin
 * To create a moderator the user should request an admin for that role
 
 #### Administrators
 
-* Users that manage the technical details required for running the forum. This user must be able to :
-    * Promote or demote a normal user to, or from a moderator user.
+* Users that manage the technical details required for running the forum. This user is able to :
+    * Promote or demote a normal user to, or from a moderator user
     * Receive reports from moderators. If the admin receives a report from a moderator, he can respond to that report
-    * Delete posts and comments
-    * Manage the categories, by being able to create and delete them.
+    * Delete posts and comment
+    * Manage the categories, by being able to create and delete them
 
 
 
