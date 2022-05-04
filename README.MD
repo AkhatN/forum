@@ -3,9 +3,9 @@
 ## To run the project locally
 
 Run the following commands:
-     For building an exec file: **make build**
-     For running the project: **make run** or **go run main.go**
-     For creating an image and running container: **make docker**
+    For building an exec file: **make build**
+    For running the project: **make run** or **go run main.go**
+    For creating an image and running container: **make docker**
 
 ## Admin Role account
 
@@ -13,7 +13,7 @@ Run the following commands:
     Password: admin
 
 ## Description
-**MVC** pattern was used in the forum
+**MVC** pattern was used to structure the forum
 
 This web forum allows :
 
