@@ -28,8 +28,9 @@ The web forum with **Monolithic architecture** and **MVC** pattern allows:
 
 
 ### Used technologies and packages
-* SQLite
-* Docker
+* SQLite - for storing data in the database
+* Docker - for running the project in a container
+* Bootstrap - for the design of an adaptive website
 * Standard go packages are used.
 * github.com/mattn/go-sqlite3
 * golang.org/x/crypto/bcrypt
